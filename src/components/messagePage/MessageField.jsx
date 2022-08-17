@@ -2,7 +2,6 @@ import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 
-
 const WrapperField = styled.div`
   background-color: var(--color-ui);
   width: 100%;
@@ -56,8 +55,36 @@ const MessageField = ({
   textMessage,
   getTextMessage,
   setTextMessageObj,
+  autoAnswer,
+  saveMessage,
+  loadingForMessage,
 }) => {
-
+  let date = new Date();
+  let userMessage = {
+    date:
+      date.getMonth() +
+      "/" +
+      date.getDate() +
+      "/" +
+      date.getFullYear() +
+      " " +
+      date.getHours() +
+      ":" +
+      date.getMinutes(),
+    message: textMessage,
+    idUser: 100,
+  };
+  let sendMessage = () => {
+    loadingForMessage(true);
+    setTextMessageObj(userMessage);
+    setTimeout(() => {
+      setTextMessageObj(autoAnswer);
+      loadingForMessage(false);
+      saveMessage();
+    }, 10000);
+    getTextMessage("");
+    saveMessage();
+  };
   return (
     <WrapperField>
       <div>
@@ -66,8 +93,7 @@ const MessageField = ({
             onChange={(e) => getTextMessage(e.target.value)}
             onKeyDown={(e) => {
               if (e.keyCode === 13 && textMessage !== "") {
-                setTextMessageObj();
-                getTextMessage("");
+                sendMessage();
               }
             }}
             value={textMessage}
@@ -79,6 +105,7 @@ const MessageField = ({
               opacity: "0.5",
               cursor: "pointer",
             }}
+            onClick={sendMessage}
           />
         </div>
       </div>

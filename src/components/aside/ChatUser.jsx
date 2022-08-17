@@ -2,7 +2,6 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import Image from "../common/Image";
 
-
 const User = styled(NavLink)`
   border-bottom: 1px solid var(--color-border);
   padding: 10px;

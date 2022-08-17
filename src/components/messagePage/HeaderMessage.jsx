@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import Image from "../common/Image";
 
-
 const WrapperHeaderMessage = styled.div`
   display: flex;
   align-items: center;
@@ -19,7 +18,7 @@ const WrapperHeaderMessage = styled.div`
 const HeaderMessage = ({ url, name }) => {
   return (
     <WrapperHeaderMessage>
-      <Image url={url} name={name} checked={true} />
+      <Image url={url} name={name} checked={!url ? false : true} />
       <div>{name}</div>
     </WrapperHeaderMessage>
   );

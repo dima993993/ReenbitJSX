@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Chats } from "./Chats";
 import { HeaderAside } from "./HeaderAside";
-import {connect} from 'react-redux';
+import { connect } from "react-redux";
 import { getCurrentUser, setTextSearch } from "../../redux/reducer";
 
 const AsideStyled = styled.div`
@@ -21,14 +21,17 @@ const AsideStyled = styled.div`
 `;
 
 const AsideWrapper = (props) => {
-  // let filterUsers = props.users.filter((user) => {
-  //   let nameUser = user.name.slice(0, props.textSearch.length);
-  //   return nameUser.toLowerCase() === props.textSearch.toLowerCase();
-  // });
+  let filterUsers = props.users.filter((user) => {
+    let nameUser = user.name.slice(0, props.textSearch.length);
+    return nameUser.toLowerCase() === props.textSearch.toLowerCase();
+  });
   return (
     <AsideStyled>
-      <HeaderAside setTextInput={props.setTextSearch} textInput={props.textSearch} />
-      <Chats users={props.users} setCurrentUser={props.getCurrentUser} />
+      <HeaderAside
+        setTextInput={props.setTextSearch}
+        textInput={props.textSearch}
+      />
+      <Chats users={filterUsers} setCurrentUser={props.getCurrentUser} />
     </AsideStyled>
   );
 };
@@ -36,9 +39,11 @@ const AsideWrapper = (props) => {
 const mapStateToProps = (state) => {
   return {
     users: state.app.users,
-    textSearch: state.app.textSearch
+    textSearch: state.app.textSearch,
+  };
+};
 
-  }
-}
-
-export const Aside = connect(mapStateToProps, {setTextSearch, getCurrentUser})(AsideWrapper);
+export const Aside = connect(mapStateToProps, {
+  setTextSearch,
+  getCurrentUser,
+})(AsideWrapper);
