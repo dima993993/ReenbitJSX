@@ -1,25 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import styled from "styled-components";
+import { Aside } from "./components/aside/Aside";
+import { Route, Routes } from "react-router-dom";
+import { MessagePage } from "./components/messagePage/MessagePage";
+import { usersData } from "./data/data";
 
-function App() {
+const WrapperApp = styled.div`
+  display: grid;
+  grid-template-columns: 2fr 6fr;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+`;
+
+const App = () => {
+  const [currentUser, setCurrentUser] = useState({});
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <WrapperApp>
+      <Aside users={usersData} setCurrentUser={setCurrentUser} />
+      <div>
+        <Routes>
+          <Route
+            path="/"
+            element={<MessagePage currentUser={usersData[0]} />}
+          ></Route>
+          <Route
+            path="/dialog/:id"
+            element={<MessagePage currentUser={currentUser} />}
+          ></Route>
+        </Routes>
+      </div>
+    </WrapperApp>
   );
-}
+};
 
 export default App;

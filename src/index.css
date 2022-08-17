@@ -1,13 +1,56 @@
-body {
+@import-normalize;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+* {
+  box-sizing: border-box;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+:root {
+  /*Typography*/
+  --family: 'Roboto', sans-serif;
+  --fs-sm: 14px;
+  --fs-md: 16px;
+  --fs-lg: 20px;
+  --fw-light: 300;
+  --fw-normal: 500;
+  --fw-bold: 700;
 }
+
+body[data-theme='dark'] {
+  --color-text: #ecf0f1;
+  --color-bg: #2c3e50;
+  --color-ui: #34495e;
+  --color-border: #222d38;
+  --color-user-message: #ecf0f1;
+  --color-text-user-message: #2d3436;
+  --color-my-message: #34495e;
+  --color-text-my-message: #ecf0f1;
+  
+  
+
+}
+body[data-theme='light'] {
+  --color-text: #2d3436;
+  --color-bg: #ecf0f1;
+  --color-ui: #cccccc;
+  --color-border: #999999;
+  --color-user-message: #2c3e50;
+  --color-text-user-message: #ecf0f1;
+  --color-my-message: #cccccc;
+  --color-text-my-message: #2d3436;
+}
+
+body {
+  font-family: var(--family);
+  font-weight: var(--fw-light);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  height: 100%;
+}
+html {
+  height: 100%;
+}
+
+
