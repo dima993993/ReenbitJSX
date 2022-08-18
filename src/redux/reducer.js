@@ -1,6 +1,7 @@
 import { messageAPI } from "../api/api";
 import { usersData } from "../data/data";
 
+const GET_USERS = "GET_USERS";
 const GET_CURRENT_USER = "FILTER_USERS";
 const GET_TEXT_MESSAGE = "GET_TEXT_MESSAGE";
 const ADD_MESSAGE_IN_PAGE = "ADD_MESSAGE_IN_PAGE";
@@ -9,18 +10,26 @@ const AUTO_ANSWER = "AUTO_ANSWER";
 const LOADING_MESSAGE = "LOADING_MESSAGE";
 const SAVE_MESSAGE_USER = "SAVE_MESSAGE_USER";
 
+const getUsersData = localStorage.getItem("users");
+const parseUsers = JSON.parse(getUsersData);
+
 const initialState = {
-  users: usersData,
+  users: parseUsers === null ? usersData : parseUsers,
   currentUser: {},
   autoAnswer: {},
   textMessage: "",
   textSearch: "",
   loadingMessage: false,
-  test: {},
 };
 
 const AppReducer = (state = initialState, action) => {
   switch (action.type) {
+    case GET_USERS: {
+      return {
+        ...state,
+        users: action.users,
+      };
+    }
     case GET_TEXT_MESSAGE: {
       return {
         ...state,
@@ -49,9 +58,9 @@ const AppReducer = (state = initialState, action) => {
       };
     }
     case AUTO_ANSWER: {
-      let correctDate = action.date.replace("-", "/").split(":");
+      localStorage.setItem("users", JSON.stringify(state.users));
       let newObj = {
-        date: correctDate[0] + ":" + correctDate[1],
+        date: action.date,
         message: action.message,
         idUser: state.currentUser.id,
       };
@@ -80,6 +89,7 @@ const AppReducer = (state = initialState, action) => {
 };
 
 // Action Creator
+export const getUsers = (users) => ({ type: GET_USERS, users });
 export const getTextMessage = (message) => ({
   type: GET_TEXT_MESSAGE,
   message,
@@ -103,9 +113,9 @@ export const loadingForMessage = (toggle) => ({
 
 // Thunk
 
-export const getAutoMessage = () => (dispatch) => {
+export const getAutoMessage = (currentDate) => (dispatch) => {
   messageAPI().then((data) => {
-    dispatch(setAutoMessage(data.created_at, data.value));
+    dispatch(setAutoMessage(currentDate, data.value));
   });
 };
 

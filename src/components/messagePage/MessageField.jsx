@@ -26,17 +26,17 @@ const WrapperField = styled.div`
   }
 `;
 const Field = styled.textarea.attrs({
-  type: "text",
   placeholder: "Type your message",
 })`
   width: 90%;
   outline: none;
   border: none;
-  padding: 10px 0px;
+  padding: 10px 10px;
   color: var(--color-text);
   background-color: var(--color-bg);
   resize: none;
   overflow-y: hidden;
+  border-radius: 30px;
   :focus::-webkit-input-placeholder {
     color: transparent;
   }
@@ -58,19 +58,10 @@ const MessageField = ({
   autoAnswer,
   saveMessage,
   loadingForMessage,
+  currentDate,
 }) => {
-  let date = new Date();
   let userMessage = {
-    date:
-      date.getMonth() +
-      "/" +
-      date.getDate() +
-      "/" +
-      date.getFullYear() +
-      " " +
-      date.getHours() +
-      ":" +
-      date.getMinutes(),
+    date: currentDate,
     message: textMessage,
     idUser: 100,
   };
@@ -81,7 +72,7 @@ const MessageField = ({
       setTextMessageObj(autoAnswer);
       loadingForMessage(false);
       saveMessage();
-    }, 10000);
+    }, 3000);
     getTextMessage("");
     saveMessage();
   };

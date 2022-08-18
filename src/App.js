@@ -20,8 +20,8 @@ const App = () => {
       <Aside />
       <div>
         <Routes>
-          <Route path='/' element={<MessagePage />}></Route>
-          <Route path='/dialog/:id' element={<MessagePage />}></Route>
+          <Route path="/" element={<MessagePage />}></Route>
+          <Route path="/dialog/:id" element={<MessagePage />}></Route>
         </Routes>
       </div>
     </WrapperApp>

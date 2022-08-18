@@ -1,8 +1,9 @@
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
 import styled from "styled-components";
 import HeaderMessage from "./HeaderMessage";
 import Message from "./Message";
 import MessageField from "./MessageField";
-import { connect } from "react-redux";
 import {
   getAutoMessage,
   getTextMessage,
@@ -10,7 +11,6 @@ import {
   saveMessage,
   setTextMessageObj,
 } from "../../redux/reducer";
-import { useEffect, useState } from "react";
 import { Writing } from "../common/Writing";
 
 const WrapperMassage = styled.div`
@@ -22,7 +22,17 @@ const WrapperMassage = styled.div`
     width: 90%;
     margin: 0 auto;
     padding: 25px;
-    position: relative;
+    &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: transparent;
+  }
   }
   & > div:last-child {
     position: sticky;
@@ -31,9 +41,15 @@ const WrapperMassage = styled.div`
 `;
 
 const MessagePageWrapper = (props) => {
+  let date = new Date();
+  let currentDate = date.getMonth() + "/" + date.getDate() + '/' + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes();
+
   useEffect(() => {
-    props.getAutoMessage();
+    props.getAutoMessage(currentDate);
   }, [props.autoAnswer]);
+  
+ 
+
   return (
     <WrapperMassage>
       <HeaderMessage
@@ -64,6 +80,7 @@ const MessagePageWrapper = (props) => {
         loadingForMessage={props.loadingForMessage}
         autoAnswer={props.autoAnswer}
         saveMessage={props.saveMessage}
+        currentDate={currentDate}
       />
     </WrapperMassage>
   );
