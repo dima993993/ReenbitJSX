@@ -56,9 +56,10 @@ const MessageField = ({
   getTextMessage,
   setTextMessageObj,
   autoAnswer,
-  saveMessage,
+  deleteUserInArray,
   loadingForMessage,
   currentDate,
+  addUserInArray,
 }) => {
   let userMessage = {
     date: currentDate,
@@ -71,10 +72,12 @@ const MessageField = ({
     setTimeout(() => {
       setTextMessageObj(autoAnswer);
       loadingForMessage(false);
-      saveMessage();
+      deleteUserInArray();
+      addUserInArray();
     }, 3000);
     getTextMessage("");
-    saveMessage();
+    deleteUserInArray();
+    addUserInArray();
   };
   return (
     <WrapperField>

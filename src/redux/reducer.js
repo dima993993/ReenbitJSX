@@ -1,20 +1,19 @@
 import { messageAPI } from "../api/api";
 import { usersData } from "../data/data";
 
-const GET_USERS = "GET_USERS";
 const GET_CURRENT_USER = "FILTER_USERS";
 const GET_TEXT_MESSAGE = "GET_TEXT_MESSAGE";
 const ADD_MESSAGE_IN_PAGE = "ADD_MESSAGE_IN_PAGE";
 const GET_TEXT_SEARCH = "GET_TEXT_SEARCH";
 const AUTO_ANSWER = "AUTO_ANSWER";
 const LOADING_MESSAGE = "LOADING_MESSAGE";
-const SAVE_MESSAGE_USER = "SAVE_MESSAGE_USER";
+const DELETE_USER = "SAVE_MESSAGE_USER";
+const ADD_USER = "ADD_USER";
 
-const getUsersData = localStorage.getItem("users");
-const parseUsers = JSON.parse(getUsersData);
+const getUsersData = JSON.parse(localStorage.getItem("users"));
 
 const initialState = {
-  users: parseUsers === null ? usersData : parseUsers,
+  users: getUsersData === null ? usersData : getUsersData,
   currentUser: {},
   autoAnswer: {},
   textMessage: "",
@@ -24,12 +23,6 @@ const initialState = {
 
 const AppReducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_USERS: {
-      return {
-        ...state,
-        users: action.users,
-      };
-    }
     case GET_TEXT_MESSAGE: {
       return {
         ...state,
@@ -75,12 +68,16 @@ const AppReducer = (state = initialState, action) => {
         loadingMessage: action.toggle,
       };
     }
-    case SAVE_MESSAGE_USER: {
+    case DELETE_USER: {
       return {
         ...state,
-        users: state.users.map((user) =>
-          user.id === state.currentUser.id ? state.currentUser : user
-        ),
+        users: state.users.filter((user) => user.id !== state.currentUser.id),
+      };
+    }
+    case ADD_USER: {
+      return {
+        ...state,
+        users: [state.currentUser, ...state.users],
       };
     }
     default:
@@ -89,7 +86,7 @@ const AppReducer = (state = initialState, action) => {
 };
 
 // Action Creator
-export const getUsers = (users) => ({ type: GET_USERS, users });
+
 export const getTextMessage = (message) => ({
   type: GET_TEXT_MESSAGE,
   message,
@@ -105,7 +102,8 @@ export const setAutoMessage = (date, message) => ({
   date,
   message,
 });
-export const saveMessage = () => ({ type: SAVE_MESSAGE_USER });
+export const deleteUserInArray = () => ({ type: DELETE_USER });
+export const addUserInArray = () => ({ type: ADD_USER });
 export const loadingForMessage = (toggle) => ({
   type: LOADING_MESSAGE,
   toggle,

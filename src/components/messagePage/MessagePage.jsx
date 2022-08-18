@@ -8,8 +8,9 @@ import {
   getAutoMessage,
   getTextMessage,
   loadingForMessage,
-  saveMessage,
+  deleteUserInArray,
   setTextMessageObj,
+  addUserInArray,
 } from "../../redux/reducer";
 import { Writing } from "../common/Writing";
 
@@ -79,8 +80,9 @@ const MessagePageWrapper = (props) => {
         loadingMessage={props.loadingMessage}
         loadingForMessage={props.loadingForMessage}
         autoAnswer={props.autoAnswer}
-        saveMessage={props.saveMessage}
+        deleteUserInArray={props.deleteUserInArray}
         currentDate={currentDate}
+        addUserInArray={props.addUserInArray}
       />
     </WrapperMassage>
   );
@@ -99,6 +101,7 @@ export const MessagePage = connect(mapStateToProps, {
   getTextMessage,
   setTextMessageObj,
   getAutoMessage,
-  saveMessage,
+  deleteUserInArray,
   loadingForMessage,
+  addUserInArray,
 })(MessagePageWrapper);
