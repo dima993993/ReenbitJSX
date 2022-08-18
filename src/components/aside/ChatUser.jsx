@@ -27,12 +27,12 @@ export const ChatUser = ({ user, setCurrentUser }) => {
     <User to={`dialog/${user.id}`} onClick={() => setCurrentUser(user)}>
       <div>
         <Image name={user.name} url={user.url} checked={true} />
-        <div style={{ marginLeft: "10px" }}>
+        <div style={{ marginLeft: "10px"}}>
           <div>{user.name}</div>
-          <div style={{ opacity: "0.5" }}>{sizePrevMessage}</div>
+          <div style={{ opacity: "0.5", fontSize: '12px'}}>{sizePrevMessage}</div>
         </div>
       </div>
-      <div>{user.message[user.message.length - 1].date}</div>
+      <div style={{textAlign: 'right'}}>{user.message[user.message.length - 1].date.split(' ')[0]}</div>
     </User>
   );
 };

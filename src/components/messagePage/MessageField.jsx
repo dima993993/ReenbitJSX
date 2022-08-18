@@ -74,7 +74,7 @@ const MessageField = ({
       loadingForMessage(false);
       deleteUserInArray();
       addUserInArray();
-    }, 3000);
+    }, 10000);
     getTextMessage("");
     deleteUserInArray();
     addUserInArray();
