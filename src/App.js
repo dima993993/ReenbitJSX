@@ -12,6 +12,9 @@ const WrapperApp = styled.div`
   bottom: 0;
   left: 0;
   right: 0;
+  @media (max-width: 960px) {
+    grid-template-columns: 4fr 4fr;
+  }
 `;
 
 const App = () => {

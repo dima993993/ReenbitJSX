@@ -3,23 +3,17 @@ import Image from "../common/Image";
 import { Search } from "../common/Search";
 import { Theme } from "../common/Theme";
 
-
 const HeaderAsideWrapper = styled.div`
   padding: 20px;
   background-color: var(--color-ui);
   border-bottom: 1px solid var(--color-border);
-  & > div:first-child {
+  .theme_block {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    & > div:first-child {
-      width: 60px;
-      img {
-        max-width: 100%;
-      }
-    }
-    & > div:last-child {
-      cursor: pointer;
+    @media (max-width: 500px) {
+      display: block;
+      text-align: center;
     }
   }
   & > div:last-child {
@@ -30,7 +24,7 @@ const HeaderAsideWrapper = styled.div`
 export const HeaderAside = ({ setTextInput, textInput }) => {
   return (
     <HeaderAsideWrapper>
-      <div>
+      <div className="theme_block">
         <Image
           url={"https://cdn-icons-png.flaticon.com/512/149/149071.png"}
           name="User"

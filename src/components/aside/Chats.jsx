@@ -17,6 +17,7 @@ export const Chats = ({ users, setCurrentUser }) => {
       <div>
         {users.length !== 0 ? (
           users.map((el, index) => (
+            
             <ChatUser key={index} setCurrentUser={setCurrentUser} user={el} />
           ))
         ) : (

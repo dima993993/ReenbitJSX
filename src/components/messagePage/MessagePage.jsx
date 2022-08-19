@@ -24,16 +24,16 @@ const WrapperMassage = styled.div`
     margin: 0 auto;
     padding: 25px;
     &::-webkit-scrollbar {
-    width: 6px;
-  }
+      width: 6px;
+    }
 
-  &::-webkit-scrollbar-track {
-    background-color: transparent;
-  }
+    &::-webkit-scrollbar-track {
+      background-color: transparent;
+    }
 
-  &::-webkit-scrollbar-thumb {
-    background-color: transparent;
-  }
+    &::-webkit-scrollbar-thumb {
+      background-color: transparent;
+    }
   }
   & > div:last-child {
     position: sticky;
@@ -43,13 +43,20 @@ const WrapperMassage = styled.div`
 
 const MessagePageWrapper = (props) => {
   let date = new Date();
-  let currentDate = date.getMonth() + "/" + date.getDate() + '/' + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes();
+  let currentDate =
+    date.getMonth() +
+    "/" +
+    date.getDate() +
+    "/" +
+    date.getFullYear() +
+    " " +
+    date.getHours() +
+    ":" +
+    date.getMinutes();
 
   useEffect(() => {
     props.getAutoMessage(currentDate);
   }, [props.autoAnswer]);
-  
- 
 
   return (
     <WrapperMassage>
@@ -57,7 +64,7 @@ const MessagePageWrapper = (props) => {
         url={props.currentUser.url}
         name={props.currentUser.name}
       />
-      <div className='bodyMessage'>
+      <div className="bodyMessage">
         {props.currentUser.message !== undefined
           ? props.currentUser.message.map((el, index) => (
               <Message

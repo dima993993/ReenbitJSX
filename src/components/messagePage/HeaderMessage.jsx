@@ -8,7 +8,7 @@ const WrapperHeaderMessage = styled.div`
   background-color: var(--color-ui);
   border-bottom: 1px solid var(--color-border);
   height: 15vh;
-  & > div:last-child {
+  .name {
     font-size: var(--fs-lg);
     font-weight: var(--fw-bold);
     margin-left: 20px;
@@ -19,7 +19,7 @@ const HeaderMessage = ({ url, name }) => {
   return (
     <WrapperHeaderMessage>
       <Image url={url} name={name} checked={!url ? false : true} />
-      <div>{name}</div>
+      <div className="name">{name}</div>
     </WrapperHeaderMessage>
   );
 };
