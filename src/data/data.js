@@ -22,7 +22,7 @@ export const usersData = [
           "-Great! Could you please print out the materials for me as well? ",
         idUser: 100,
       },
-      { date: "08/16/2022 18:40", message: "- Yes, sure. ", idUser: 1 },
+      { date: "08/16/2022 18:40", message: "Yes, sure. ", idUser: 1 },
       {
         date: "08/16/2022 18:46",
         message: "Thanks a lot, you are saving me :)",

@@ -60,12 +60,14 @@ const MessageField = ({
   loadingForMessage,
   currentDate,
   addUserInArray,
+  currentUser,
 }) => {
   let userMessage = {
     date: currentDate,
     message: textMessage,
     idUser: 100,
   };
+
   let sendMessage = () => {
     loadingForMessage(true);
     setTextMessageObj(userMessage);

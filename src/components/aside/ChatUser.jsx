@@ -24,15 +24,24 @@ const User = styled(NavLink)`
 export const ChatUser = ({ user, setCurrentUser }) => {
   let sizePrevMessage = user.message[user.message.length - 1].message;
   return (
-    <User to={`dialog/${user.id}`} onClick={() => setCurrentUser(user)}>
+    <User
+      to={`dialog/${user.id}`}
+      onClick={() => {
+        localStorage.setItem("currentUser", JSON.stringify(user));
+        setCurrentUser(user);
+      }}>
       <div>
         <Image name={user.name} url={user.url} checked={true} />
-        <div style={{ marginLeft: "10px"}}>
+        <div style={{ marginLeft: "10px" }}>
           <div>{user.name}</div>
-          <div style={{ opacity: "0.5", fontSize: '12px'}}>{sizePrevMessage}</div>
+          <div style={{ opacity: "0.5", fontSize: "12px" }}>
+            {sizePrevMessage}
+          </div>
         </div>
       </div>
-      <div style={{textAlign: 'right'}}>{user.message[user.message.length - 1].date.split(' ')[0]}</div>
+      <div style={{ textAlign: "right" }}>
+        {user.message[user.message.length - 1].date.split(" ")[0]}
+      </div>
     </User>
   );
 };

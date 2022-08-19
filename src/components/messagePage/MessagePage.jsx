@@ -64,7 +64,7 @@ const MessagePageWrapper = (props) => {
         url={props.currentUser.url}
         name={props.currentUser.name}
       />
-      <div className="bodyMessage">
+      <div className='bodyMessage'>
         {props.currentUser.message !== undefined
           ? props.currentUser.message.map((el, index) => (
               <Message
@@ -90,6 +90,7 @@ const MessagePageWrapper = (props) => {
         deleteUserInArray={props.deleteUserInArray}
         currentDate={currentDate}
         addUserInArray={props.addUserInArray}
+        currentUser={props.currentUser}
       />
     </WrapperMassage>
   );

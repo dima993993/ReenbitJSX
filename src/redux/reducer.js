@@ -11,10 +11,11 @@ const DELETE_USER = "SAVE_MESSAGE_USER";
 const ADD_USER = "ADD_USER";
 
 const getUsersData = JSON.parse(localStorage.getItem("users"));
+const getCurrentUserData = JSON.parse(localStorage.getItem("currentUser"));
 
 const initialState = {
   users: getUsersData === null ? usersData : getUsersData,
-  currentUser: {},
+  currentUser: getCurrentUserData === null ? {} : getCurrentUserData,
   autoAnswer: {},
   textMessage: "",
   textSearch: "",
@@ -75,6 +76,7 @@ const AppReducer = (state = initialState, action) => {
       };
     }
     case ADD_USER: {
+      localStorage.setItem("currentUser", JSON.stringify(state.currentUser));
       return {
         ...state,
         users: [state.currentUser, ...state.users],
